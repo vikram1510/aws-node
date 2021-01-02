@@ -18,7 +18,6 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI
-      - printf '[{"name":"myphpcontainer", imageUri":"%s"}]'
-$REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"myphpcontainer", imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
 artifacts:
  files: imagedefinitions.json
