@@ -3,7 +3,7 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      # - printenv
+      - printenv
       - echo Logging in to Amazon ECR...
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
       - REPOSITORY_URI=273935751341.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
@@ -19,5 +19,6 @@ phases:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI
       - printf '[{"name":"aws-node", imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json
 artifacts:
  files: imagedefinitions.json
